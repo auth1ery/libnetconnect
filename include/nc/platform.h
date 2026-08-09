@@ -22,6 +22,8 @@ struct nc_platform {
     int (*irq_request)(uint32_t irq, void (*handler)(void *ctx), void *ctx);
     void (*irq_free)(uint32_t irq);
     void (*log)(const char *fmt, ...);
+    int (*firmware_load)(const char *name, void **data, size_t *len);
+    void (*firmware_free)(void *data);
 };
 
 int nc_platform_register(struct nc_platform *plat);

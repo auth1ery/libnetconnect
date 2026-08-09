@@ -107,7 +107,7 @@ static int linux_irq_request(uint32_t irq, void (*handler)(void *ctx), void *ctx
     (void)irq;
     (void)handler;
     (void)ctx;
-    /* userspace has no real irq path, drivers must fall back to polling */
+    /* Userspace has no real IRQ path, drivers must fall back to polling */
     return -1;
 }
 

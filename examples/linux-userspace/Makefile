@@ -1,20 +1,25 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -I../../include -I../../drivers/net/virtio-net
+CFLAGS = -Wall -Wextra -std=c11 -I../../include
 LDFLAGS = -lpthread
 
-SRCS = main.c platform_linux.c ../../src/core/registry.c ../../drivers/net/virtio-net/virtio_net.c
+SRCS = main.c platform_linux.c
+LIB ?= ../../build/libnetconnect.a
+BUILD_DIR ?= ../../build
 OBJS = $(SRCS:.c=.o)
 BIN = nc_linux_shim
 
-all: $(BIN)
+all: $(BUILD_DIR) $(BIN)
 
-$(BIN): $(OBJS)
-$(CC) $(OBJS) -o $(BIN) $(LDFLAGS)
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
+
+$(BIN): $(OBJS) $(LIB)
+	$(CC) $(OBJS) $(LIB) -o $(BIN) $(LDFLAGS)
 
 %.o: %.c
 $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-rm -f $(OBJS) $(BIN)
+	rm -f $(OBJS) $(BIN)
 
 .PHONY: all clean

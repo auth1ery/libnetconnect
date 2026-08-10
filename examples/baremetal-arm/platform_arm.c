@@ -122,6 +122,20 @@ static void arm_log(const char *fmt, ...)
     (void)fmt;
 }
 
+static int arm_firmware_load(const char *name, void **data, size_t *len)
+{
+    /* Baremetal example doesn't implement firmware loading */
+    (void)name;
+    (void)data;
+    (void)len;
+    return -1;
+}
+
+static void arm_firmware_free(void *data)
+{
+    (void)data;
+}
+
 int platform_arm_init(void)
 {
     g_heap_offset = 0;
@@ -147,6 +161,8 @@ int platform_arm_init(void)
     g_platform.irq_request = arm_irq_request;
     g_platform.irq_free = arm_irq_free;
     g_platform.log = arm_log;
+    g_platform.firmware_load = arm_firmware_load;
+    g_platform.firmware_free = arm_firmware_free;
 
     return nc_platform_register(&g_platform);
 }

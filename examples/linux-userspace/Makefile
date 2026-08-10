@@ -17,7 +17,7 @@ $(BIN): $(OBJS) $(LIB)
 	$(CC) $(OBJS) $(LIB) -o $(BIN) $(LDFLAGS)
 
 %.o: %.c
-$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS) $(BIN)

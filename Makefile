@@ -64,10 +64,22 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 $(BUILD_DIR)/virtio_net.o: $(VIRTIO_NET_SRCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(BUILD_DIR)/e1000.o: $(E1000_SRCS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/r8169.o: $(R8169_SRCS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(BUILD_DIR)/iwlwifi.o: $(IWLWIFI_SRCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(BUILD_DIR)/ath9k.o: $(ATH9K_SRCS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(BUILD_DIR)/rtl8188.o: $(RTL8188_SRCS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/ahci.o: $(AHCI_SRCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 example: $(LIB)

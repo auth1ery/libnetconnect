@@ -19,6 +19,7 @@ extern struct nc_net_driver nc_r8169_driver;
 extern struct nc_wifi_driver nc_iwlwifi_driver;
 extern struct nc_wifi_driver nc_ath9k_driver;
 extern struct nc_wifi_driver nc_rtl8188_driver;
+extern struct nc_storage_driver nc_ahci_driver;
 
 int nc_platform_register(struct nc_platform *plat)
 {
@@ -94,4 +95,5 @@ void nc_drivers_init(void)
     nc_register_wifi_driver(&nc_iwlwifi_driver);
     nc_register_wifi_driver(&nc_ath9k_driver);
     nc_register_wifi_driver(&nc_rtl8188_driver);
+    nc_register_storage_driver(&nc_ahci_driver);
 }

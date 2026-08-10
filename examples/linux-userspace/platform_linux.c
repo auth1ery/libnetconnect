@@ -120,8 +120,22 @@ static void linux_log(const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    vfprintf(stderr, fmt, args);
+    vprintf(fmt, args);
     va_end(args);
+}
+
+static int linux_firmware_load(const char *name, void **data, size_t *len)
+{
+    /* Userspace shim doesn't implement firmware loading */
+    (void)name;
+    (void)data;
+    (void)len;
+    return -1;
+}
+
+static void linux_firmware_free(void *data)
+{
+    (void)data;
 }
 
 struct nc_platform g_linux_platform = {
@@ -140,4 +154,6 @@ struct nc_platform g_linux_platform = {
     .irq_request = linux_irq_request,
     .irq_free = linux_irq_free,
     .log = linux_log,
+    .firmware_load = linux_firmware_load,
+    .firmware_free = linux_firmware_free,
 };

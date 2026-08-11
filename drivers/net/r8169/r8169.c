@@ -325,12 +325,14 @@ static int r8169_recv(struct nc_device *dev, uint8_t *buf, size_t buf_len)
     
     memcpy(buf, (void *)(uintptr_t)priv->rx_desc[idx].addr, priv->rx_desc[idx].len);
     
+    uint32_t pkt_len = priv->rx_desc[idx].len;
+    
     /* Return buffer to device */
     priv->rx_desc[idx].len = R8169_RX_BUFFER_SIZE;
     priv->rx_desc[idx].opts = R8169_RX_OWN;
     priv->rx_tail++;
     
-    return (int)priv->rx_desc[idx].len;
+    return (int)pkt_len;
 }
 
 static void r8169_get_mac(struct nc_device *dev, uint8_t mac_out[6])

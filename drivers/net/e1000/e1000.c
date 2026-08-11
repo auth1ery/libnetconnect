@@ -385,6 +385,7 @@ static int e1000_recv(struct nc_device *dev, uint8_t *buf, size_t buf_len)
     
     memcpy(buf, (void *)(uintptr_t)priv->rx_desc[idx].buffer_addr, priv->rx_desc[idx].length);
     
+    uint16_t pkt_len = priv->rx_desc[idx].length;
     priv->rx_desc[idx].status = 0;
     priv->rx_tail++;
     
@@ -392,7 +393,7 @@ static int e1000_recv(struct nc_device *dev, uint8_t *buf, size_t buf_len)
     plat->mmio_write32((volatile void *)((uint8_t *)priv->mmio_base + E1000_RDT), priv->rx_tail);
     plat->mmio_write32((volatile void *)((uint8_t *)priv->mmio_base + E1000_RDH), priv->rx_head);
     
-    return (int)priv->rx_desc[idx].length;
+    return (int)pkt_len;
 }
 
 static void e1000_get_mac(struct nc_device *dev, uint8_t mac_out[6])

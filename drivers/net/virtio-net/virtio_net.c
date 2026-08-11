@@ -78,7 +78,7 @@ struct virtio_net_priv {
     volatile void *mmio_base;
     void *rx_ring;
     void *tx_ring;
-    void *rx_buffers[VIRTIO_NET_RX_BUFSIZE];
+    void *rx_buffers[256];
     uint64_t rx_phys;
     uint64_t tx_phys;
     size_t ring_bytes;

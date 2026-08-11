@@ -13,6 +13,8 @@ struct nc_platform {
     void (*dma_free)(void *virt, uint64_t phys, size_t size);
     uint32_t (*mmio_read32)(volatile void *addr);
     void (*mmio_write32)(volatile void *addr, uint32_t val);
+    uint64_t (*mmio_read64)(volatile void *addr);
+    void (*mmio_write64)(volatile void *addr, uint64_t val);
     uint64_t (*time_ns)(void);
     void (*sleep_ms)(uint32_t ms);
     nc_lock_t *(*lock_create)(void);

@@ -62,6 +62,16 @@ static void linux_mmio_write32(volatile void *addr, uint32_t val)
     *(volatile uint32_t *)addr = val;
 }
 
+static uint64_t linux_mmio_read64(volatile void *addr)
+{
+    return *(volatile uint64_t *)addr;
+}
+
+static void linux_mmio_write64(volatile void *addr, uint64_t val)
+{
+    *(volatile uint64_t *)addr = val;
+}
+
 static uint64_t linux_time_ns(void)
 {
     struct timespec ts;
@@ -145,6 +155,8 @@ struct nc_platform g_linux_platform = {
     .dma_free = linux_dma_free,
     .mmio_read32 = linux_mmio_read32,
     .mmio_write32 = linux_mmio_write32,
+    .mmio_read64 = linux_mmio_read64,
+    .mmio_write64 = linux_mmio_write64,
     .time_ns = linux_time_ns,
     .sleep_ms = linux_sleep_ms,
     .lock_create = linux_lock_create,
